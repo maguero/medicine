@@ -11,7 +11,7 @@ cache:
   - $HOME/.m2
 
 install:
-  - docker-compose --log-level INFO build >/dev/null
+  - docker-compose build >/dev/null
   - docker-compose start
   - docker container ls
 
