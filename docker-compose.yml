@@ -1,0 +1,38 @@
+version: '3.1'
+
+services:
+
+    gateway: 
+        build: ./gateway/   
+        depends_on:
+          - registry
+        ports:
+            - '8080:8080'
+        restart: on-failure
+      
+    registry: 
+        build: ./discovery/
+        ports:
+            - '8761:8761'
+      
+    mongo:
+        image: mongo:latest
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=admin
+            - MONGO_INITDB_ROOT_PASSWORD=123456
+            - MONGO_INITDB_DATABASE=admin
+        ports:
+            - '27017:27017'
+
+    dicom:
+        build: ./dicom/
+        container_name: dicom_container
+        ports:
+            - '8086:8086'
+        depends_on:
+            - mongo
+            - registry
+            - gateway
+        restart: on-failure
+
+    
