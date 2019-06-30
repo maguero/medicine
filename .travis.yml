@@ -1,8 +1,5 @@
 language: java
 
-env:
-  DOCKER_COMPOSE_VERSION: 1.23.2
-
 services:
   - docker
   
@@ -12,14 +9,4 @@ cache:
 
 install:
   - docker-compose build >/dev/null
-  - docker-compose start
-  - docker container ls
-
-
-#install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-
-#jdk:
- # - oraclejdk8
-
-#after_success:
-  # - mvn clean test jacoco:report coveralls:report
+  - docker images
