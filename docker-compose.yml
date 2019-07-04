@@ -15,12 +15,10 @@ services:
         ports:
             - '8761:8761'
       
-    mongo:
+    mongodb:
         image: mongo:latest
         environment:
-            - MONGO_INITDB_ROOT_USERNAME=admin
-            - MONGO_INITDB_ROOT_PASSWORD=123456
-            - MONGO_INITDB_DATABASE=admin
+            - MONGO_INITDB_DATABASE=dicom
         ports:
             - '27017:27017'
 
@@ -30,7 +28,7 @@ services:
         ports:
             - '8086:8086'
         depends_on:
-            - mongo
+            - mongodb
             - registry
             - gateway
         restart: on-failure
