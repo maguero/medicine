@@ -10,7 +10,9 @@ public class Image {
     private String id;
     private String notes;
 
-    public Image() {
+    public Image(String id, String notes) {
+        this.id = id;
+        this.notes = notes;
     }
 
     @Override
