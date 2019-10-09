@@ -5,11 +5,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/util")
-public class UtilsController {
+@RequestMapping(value = "/version")
+public class VersionController {
 
-    @RequestMapping(value = "/version", method = RequestMethod.GET)
+    public static final String APPLICATION_VERSION = "Version: 0.1 BETA";
+
+    @RequestMapping(method = RequestMethod.GET)
     public String version() {
-        return "Version: 0.1 BETA";
+        return this.APPLICATION_VERSION;
     }
 }

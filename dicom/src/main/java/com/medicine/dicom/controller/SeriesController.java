@@ -1,7 +1,7 @@
 package com.medicine.dicom.controller;
 
-import com.medicine.dicom.model.Image;
-import com.medicine.dicom.persistence.ImageRepository;
+import com.medicine.dicom.model.Series;
+import com.medicine.dicom.persistence.SeriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,39 +11,39 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/images")
-public class ImageController {
+@RequestMapping(value = "/series")
+public class SeriesController {
 
     @Autowired
-    private ImageRepository repository;
+    private SeriesRepository repository;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public List<Image> getAll() {
+    public List<Series> getAll() {
         return repository.findAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Optional<Image> getById(@PathVariable("id") String id) {
+    public Optional<Series> getById(@PathVariable("id") String id) {
         return repository.findById(id);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public Image saveImage(@RequestBody Image image) {
-        if (repository.existsById(image.getId())) {
+    public Series saveSerie(@RequestBody Series series) {
+        if (repository.existsById(series.getId())) {
             throw new ResponseStatusException(
-                    HttpStatus.CONFLICT, "Image #" + image.getId() + " already exists.");
+                    HttpStatus.CONFLICT, "Serie #" + series.getId() + " already exists.");
         }
-        return repository.save(image);
+        return repository.save(series);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public Image updateImage(@PathVariable("id") String id, @RequestBody Image image) {
-        image.setId(id);
-        return repository.save(image);
+    public Series updateSerie(@PathVariable("id") String id, @RequestBody Series series) {
+        series.setId(id);
+        return repository.save(series);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void deleteImage(@PathVariable("id") String id) {
+    public void deleteSerie(@PathVariable("id") String id) {
         repository.deleteById(id);
     }
 }
