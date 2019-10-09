@@ -14,16 +14,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(UtilsController.class)
-public class UtilControllerTest {
+@WebMvcTest(VersionController.class)
+public class VersionControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     public void shouldReturnVersionMessage() throws Exception {
-        this.mockMvc.perform(get("/utils/version")).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString(UtilsController.APPLICATION_VERSION)));
+        this.mockMvc.perform(get("/version")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString(VersionController.APPLICATION_VERSION)));
     }
 
 }
